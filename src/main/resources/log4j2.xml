@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT">
+            <PatternLayout pattern="%m%n"></PatternLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.acn.gamechangers.mymusicranking" level="debug" additivity="false">
+            <AppenderRef ref="STDOUT"></AppenderRef>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="STDOUT"></AppenderRef>
+        </Root>
+    </Loggers>
+</Configuration>

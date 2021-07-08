@@ -24,16 +24,23 @@
         justify-content: normal
     }
 
+
+
+
+
 </style>
 <div class="navbar navbar-dark bg-primary" th:fragment="header">
     <a class="navbar-brand" href="/songs">Music Rater</a>
     <div class="navbar navbar-expand-lg" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active" th:classappend="${module == 'songs' ? 'active' : ''}">
-                <a class="nav-link" th:href="@{/songs}">MusicRater<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/songs}">Music Rater<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" th:classappend="${module == 'form' ? 'active' : ''}">
                 <a class="nav-link" th:href="@{/songs/form}">Create Music</a>
+            </li>
+            <li class="nav-item" th:classappend="${module == 'createCategory' ? 'active' : ''}">
+                <a class="nav-link" th:href="@{/category/create}">Create Category</a>
             </li>
             <li class="nav-item" th:classappend="${module == 'userPlaylists' ? 'active' : ''}">
                 <a class="nav-link" th:href="@{/home}">Your Playlist</a>

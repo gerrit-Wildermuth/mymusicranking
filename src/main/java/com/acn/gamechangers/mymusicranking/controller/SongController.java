@@ -7,6 +7,7 @@ import com.acn.gamechangers.mymusicranking.repository.AlbumRepository;
 import com.acn.gamechangers.mymusicranking.repository.CategoryRepository;
 import com.acn.gamechangers.mymusicranking.repository.SongRepository;
 import com.acn.gamechangers.mymusicranking.services.SongServiceImpl;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller()
 @RequestMapping("/songs")
+@Log4j2
 public class SongController {
 
     private final SongServiceImpl songService;
@@ -32,28 +35,11 @@ public class SongController {
         this.songRepository = songRepository;
     }
 
-    @GetMapping("/{songsId}")
-    @ResponseBody
-    public String readSongs(@PathVariable("songsId") Integer songsId) {
-        Song.builder().title("Test").build();
-        if (songsId < songService.readSongs().size()) {
-            return songService.readSongs().stream().findAny().get().toString();
-        }
-        return ResponseEntity.badRequest().build().toString();
-    }
-
-    @GetMapping("/{songsId}/noBand")
-    public String readSongsWithoutAlbum(@PathVariable("songsId") Integer songsId) {
-        if (songsId < songService.readSongs().size()) {
-            return songService.readSongs().stream().findAny().get().toStringWithoutAlbum();
-        }
-        return ResponseEntity.badRequest().build().toString();
-    }
-
     @GetMapping("/form")
     public ModelAndView showForm() {
         ModelAndView modelAndView = new ModelAndView();
         Song song = new Song();
+        song.setReleaseDate(LocalDate.now());
         List<Category> categoryList = categoryRepository.findAll();
         List<Album> albumList = albumRepository.findAll();
         modelAndView.addObject("categoryList", categoryList);
@@ -86,11 +72,14 @@ public class SongController {
             return modelAndView;
         }
         songService.addSong(song);
+        modelAndView.addObject("message",
+                "Song got registered successfully! Song Title: " + song.getTitle());
         return modelAndView;
     }
 
     @PostMapping("/deleteSong")
     public ModelAndView removeSong(@RequestParam Long songId) {
+
         songService.remove(songId);
         ModelAndView modelAndView = new ModelAndView();
         List<Song> songList = songRepository.findAll();

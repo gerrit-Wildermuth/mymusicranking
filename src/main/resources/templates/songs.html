@@ -9,15 +9,18 @@
 
     <div class="row col-lg-12 col-lg-offset-9"
          style="margin: 40px 0px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
-        <h1 style="width: 100%">songs to display</h1>
+        <h1 style="width: 100%">Our Songs</h1>
         <table id="myTable" class="display" style="width: 100%">
             <thead>
             <tr>
-                <th>Song Titel</th>
-                <th>Song Veröffentlichungs Datum</th>
-                <th>Song Preis</th>
+                <th>Title</th>
+                <th>Release date</th>
+                <th>Likes</th>
+                <th>Rating</th>
+                <th>Plays</th>
+                <th>Length</th>
                 <th>Authors</th>
-                <th>Cover</th>
+                <th>Song Cover</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -25,7 +28,7 @@
             <tbody>
             <tr th:each="song : ${songList}">
                 <td th:value="${song.title}" th:text="${song.title}"></td>
-                <td th:value="${song.publishedDate}" th:text="${song.publishedDate}"></td>
+                <td th:value="${song.releaseDate}" th:text="${song.releaseDate}"></td>
                 <td th:value="${song.likes}" th:text="${song.likes}"></td>
                 <td th:value="${song.rating}" th:text="${song.rating}"></td>
                 <td th:value="${song.plays}" th:text="${song.plays}"></td>
@@ -55,6 +58,7 @@
             $('#myTable').DataTable({
             });
         } );
+
 
 
 

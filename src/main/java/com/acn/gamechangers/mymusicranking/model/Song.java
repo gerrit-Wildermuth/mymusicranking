@@ -32,10 +32,9 @@ public class Song {
     @NotNull
     @Min(0)
     private int plays;
-    @Size(min = 2, max = 12)
     private double length;
     @PastOrPresent
-    private LocalDate publishedDate;
+    private LocalDate releaseDate;
     private String songCover;//Base64
     @ManyToMany(mappedBy = "songList",
             cascade = CascadeType.DETACH)
