@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MusicRater New Song</title>
+</head>
+<body style="background-color: #ededed;">
+<div th:replace="fragments/header" style="background-color: #337ab7; height: 50px;"></div>
+<div class="container-fluid" style="margin-top: 30px;">
+    <div class="row col-lg-4 col-lg-offset-4"
+         style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+        <form autocomplete="on" action="#" th:action="@{/songs/form}" th:object="${song}" method="post"
+              class="form-signin"
+              role="form">
+            <h3 class="form-signin-heading">New Song</h3>
+            <div class="form-group">
+                <div>title:</div>
+                <input type="text" th:field="*{title}" placeholder="title" class="form-condivol"/>
+                <div if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</div>
+            </div>
+            <div class="form-group">
+                <div>likes:</div>
+                <input type="text" th:field="*{likes}" placeholder="likes" class="form-condivol"/>
+                <div if="${#fields.hasErrors('likes')}" th:errors="*{likes}">likes Error</div>
+            </div>
+            <div class="form-group">
+                <div>rating:</div>
+                <input type="text" th:field="*{rating}" placeholder="rating" class="form-condivol"/>
+                <div if="${#fields.hasErrors('rating')}" th:errors="*{rating}">rating Error</div>
+            </div>
+            <div class="form-group">
+                <div>length:</div>
+                <input type="text" th:field="*{length}" placeholder="length" class="form-condivol"/>
+                <div if="${#fields.hasErrors('length')}" th:errors="*{length}">plays Error</div>
+            </div>
+            <div class="form-group">
+                <div>plays:</div>
+                <input type="text" th:field="*{plays}" placeholder="plays" class="form-condivol"/>
+                <div if="${#fields.hasErrors('plays')}" th:errors="*{plays}">plays Error</div>
+            </div>
+            <div>
+                <label class="col-form-label">Category</label><br/>
+                <select class="selectpicker" name="categoryList" id="categoryList" multiple="multiple">
+                    <option th:each="category : ${categoryList}" th:value="${category.getId().toString()}"
+                            th:text="${category.name }">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label class="col-form-label">Album</label><br/>
+                <select class="selectpicker" name="albumList" id="albumList" multiple="multiple">
+                    <option th:each="album : ${albumList}" th:value="${album.getId().toString()}"
+                            th:text="${album.name }">
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Create Song</button>
+            </div>
+            <span th:utext="${successMessage}"></span>
+            <div class="alert alert-danger alert-dismissible col-sm-12"
+                 th:if="${(bindingResult != null &amp;&amp; bindingResult.getAllErrors() != null)}">
+                <button type="button" class="close" data-dismiss="alert"
+                        aria-hidden="true">×
+                </button>
+                <ul th:each="data : ${bindingResult.getAllErrors()}">
+                    <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script th:inline="javascript" type="text/javascript">
+    $(function () {
+        $('select').selectpicker();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

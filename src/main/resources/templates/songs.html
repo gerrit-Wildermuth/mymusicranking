@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body style="background-color: #ededed;height: 100vh;">
+<div th:replace="fragments/header" style="background-color: #337ab7; height: 50px;"></div>
+<div class="container-fluid" style="margin-top: 30px;height: 100%;">
+
+    <div class="row col-lg-12 col-lg-offset-9"
+         style="margin: 40px 0px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+        <h1 style="width: 100%">songs to display</h1>
+        <table id="myTable" class="display" style="width: 100%">
+            <thead>
+            <tr>
+                <th>Song Titel</th>
+                <th>Song Veröffentlichungs Datum</th>
+                <th>Song Preis</th>
+                <th>Authors</th>
+                <th>Cover</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="song : ${songList}">
+                <td th:value="${song.title}" th:text="${song.title}"></td>
+                <td th:value="${song.publishedDate}" th:text="${song.publishedDate}"></td>
+                <td th:value="${song.likes}" th:text="${song.likes}"></td>
+                <td th:value="${song.rating}" th:text="${song.rating}"></td>
+                <td th:value="${song.plays}" th:text="${song.plays}"></td>
+                <td th:value="${song.length}" th:text="${song.length}"></td>
+                <td th:each="author : ${song.albumList}"
+                    th:text="${author.getFirstName()+' '+ author.getLastName()}"></td>
+                <td th:value="${song.songCover}" th:text="${song.songCover}"></td>
+                <td>
+                    <form role="form" method="POST" th:action="@{'/playlist'(songId=${song.getId()})}">
+                        <button type="submit" class="btn btn-primary">Add to playlist</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{'/songs/deletesong'(songId=${song.getId()})}" th:method="delete">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:replace="fragments/footer"></footer>
+<script th:inline="javascript" type="text/javascript">
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+            });
+        } );
+
+
+</script>
+</body>
+</html>
+
+
