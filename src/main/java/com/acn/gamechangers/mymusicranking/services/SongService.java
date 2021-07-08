@@ -11,4 +11,8 @@ public interface SongService {
     public List<Song> readSongs();
 
     void changeSong(Song song);
+
+    void remove(Song song);
+
+    void remove(Long songId);
 }

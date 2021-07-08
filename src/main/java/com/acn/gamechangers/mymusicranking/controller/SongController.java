@@ -89,6 +89,16 @@ public class SongController {
         return modelAndView;
     }
 
+    @PostMapping("/deleteSong")
+    public ModelAndView removeSong(@RequestParam Long songId) {
+        songService.remove(songId);
+        ModelAndView modelAndView = new ModelAndView();
+        List<Song> songList = songRepository.findAll();
+        modelAndView.addObject("songList", songList);
+        modelAndView.setViewName("songs");
+        return modelAndView;
+    }
+
     @PatchMapping("")
     public ResponseEntity changeSong(@RequestBody Song song) {
         songService.changeSong(song);

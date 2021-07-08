@@ -15,10 +15,12 @@ public class SongServiceImpl implements SongService {
         this.songRepository = songRepository;
     }
 
+    @Override
     public void addSong(Song song) {
         songRepository.save(song);
     }
 
+    @Override
     public List<Song> readSongs() {
         return songRepository.findAll();
     }
@@ -26,5 +28,15 @@ public class SongServiceImpl implements SongService {
     @Override
     public void changeSong(Song song) {
         songRepository.save(song);
+    }
+
+    @Override
+    public void remove(Song song) {
+        songRepository.delete(song);
+    }
+
+    @Override
+    public void remove(Long songId) {
+        songRepository.deleteById(songId);
     }
 }

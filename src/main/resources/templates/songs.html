@@ -39,7 +39,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="#" th:action="@{'/songs/deletesong'(songId=${song.getId()})}" th:method="delete">
+                    <form action="#" th:action="@{'/songs/deleteSong'(songId=${song.getId()})}" th:method="delete">
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
@@ -55,6 +55,8 @@
             $('#myTable').DataTable({
             });
         } );
+
+
 
 
 </script>
