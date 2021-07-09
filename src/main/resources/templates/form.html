@@ -46,7 +46,8 @@
                 <label class="col-form-label">Category</label><br/>
                 <select class="selectpicker" name="categoryList" id="categoryList" multiple="multiple">
                     <option th:each="category : ${categoryList}" th:value="${category.getId().toString()}"
-                            th:text="${category.name }">
+                            th:text="${category.name }"
+                            th:selected="${(category.name )=='unknown'}">
                     </option>
                 </select>
             </div>
@@ -54,7 +55,7 @@
                 <label class="col-form-label">Album</label><br/>
                 <select class="selectpicker" name="albumList" id="albumList" multiple="multiple">
                     <option th:each="album : ${albumList}" th:value="${album.getId().toString()}"
-                            th:text="${album.name }">
+                            th:text="${album.name }" th:selected="${(album.name )=='unknown'}">
                     </option>
                 </select>
             </div>
@@ -79,6 +80,9 @@
     $(function () {
         $('select').selectpicker();
     });
+
+
+
 
 
 

@@ -20,16 +20,16 @@ public class SongRestController {
     @GetMapping("/{songsId}")
     public String readSongs(@PathVariable("songsId") Integer songsId) {
         Song.builder().title("Test").build();
-        if (songsId < songService.readSongs().size()) {
-            return songService.readSongs().stream().findAny().get().toString();
+        if (songsId < songService.getSongList().size()) {
+            return songService.getSongList().stream().findAny().get().toString();
         }
         return ResponseEntity.badRequest().build().toString();
     }
 
     @GetMapping("/{songsId}/noBand")
     public String readSongsWithoutAlbum(@PathVariable("songsId") Integer songsId) {
-        if (songsId < songService.readSongs().size()) {
-            return songService.readSongs().stream().findAny().get().toStringWithoutAlbum();
+        if (songsId < songService.getSongList().size()) {
+            return songService.getSongList().stream().findAny().get().toStringWithoutAlbum();
         }
         return ResponseEntity.badRequest().build().toString();
     }

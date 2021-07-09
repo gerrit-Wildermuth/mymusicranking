@@ -15,8 +15,14 @@ public class AlbumServiceImpl implements AlbumService {
         this.albumRepository = albumRepository;
     }
 
+    @Override
     public ArrayList<Album> getAlbumList() {
         return (ArrayList<Album>) albumRepository.findAll();
+    }
+
+    @Override
+    public void addAlbum(Album album) {
+        albumRepository.save(album);
     }
 }
 

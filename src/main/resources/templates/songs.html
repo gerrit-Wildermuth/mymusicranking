@@ -19,7 +19,8 @@
                 <th>Rating</th>
                 <th>Plays</th>
                 <th>Length</th>
-                <th>Authors</th>
+                <th>Albums</th>
+                <th>Categories</th>
                 <th>Song Cover</th>
                 <th></th>
                 <th></th>
@@ -33,9 +34,11 @@
                 <td th:value="${song.rating}" th:text="${song.rating}"></td>
                 <td th:value="${song.plays}" th:text="${song.plays}"></td>
                 <td th:value="${song.length}" th:text="${song.length}"></td>
-                <td th:each="author : ${song.albumList}"
-                    th:text="${author.getFirstName()+' '+ author.getLastName()}"></td>
                 <td th:value="${song.songCover}" th:text="${song.songCover}"></td>
+                <td th:each="album : ${song.albumList}"
+                    th:value="${album.getName()}" th:text="${album.getName()}"></td>
+                <td th:each="category : ${song.categoryList}"
+                    th:value="${category.getName()}" th:text="${category.getName()}"></td>
                 <td>
                     <form role="form" method="POST" th:action="@{'/playlist'(songId=${song.getId()})}">
                         <button type="submit" class="btn btn-primary">Add to playlist</button>
@@ -50,6 +53,7 @@
             </tr>
             </tbody>
         </table>
+        <span th:utext="${message}"></span>
     </div>
 </div>
 <footer th:replace="fragments/footer"></footer>
@@ -58,6 +62,12 @@
             $('#myTable').DataTable({
             });
         } );
+
+
+
+
+
+
 
 
 

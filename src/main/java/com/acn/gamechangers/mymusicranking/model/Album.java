@@ -18,7 +18,7 @@ public class Album {
     @TableGenerator(name = "custGen", valueColumnName = "id", initialValue = 1000, allocationSize = 1)
     @GeneratedValue(generator = "custGen", strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
+    private String name;
     private LocalDate publicationDate;
     @ManyToOne
     @JoinColumn(name = "band_id")
@@ -31,9 +31,13 @@ public class Album {
     private List<Song> songList = new ArrayList<>();
 
 
-    public Album(String title, LocalDate publicationDate, List<Song> songList) {
-        this.title = title;
+    public Album(String name, LocalDate publicationDate, List<Song> songList) {
+        this.name = name;
         this.publicationDate = publicationDate;
         this.songList = songList;
+    }
+
+    public void addSongAlbum(Song song) {
+        this.songList.add(song);
     }
 }

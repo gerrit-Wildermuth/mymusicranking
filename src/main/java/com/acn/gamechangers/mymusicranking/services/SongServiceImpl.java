@@ -4,7 +4,8 @@ import com.acn.gamechangers.mymusicranking.model.Song;
 import com.acn.gamechangers.mymusicranking.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -21,13 +22,25 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<Song> readSongs() {
-        return songRepository.findAll();
+    public ArrayList<Song> getSongList() {
+        return (ArrayList<Song>) songRepository.findAll();
+    }
+
+
+    @Override
+    public Optional<Song> findByIdOptional(Long songId) {
+        return songRepository.findById(songId);
     }
 
     @Override
     public void changeSong(Song song) {
         songRepository.save(song);
+    }
+
+    @Override
+    public boolean isBookAlreadyPresent(Song song) {
+        Optional<Song> optionalSong = songRepository.findById(song.getId());
+        return optionalSong.isPresent();
     }
 
     @Override

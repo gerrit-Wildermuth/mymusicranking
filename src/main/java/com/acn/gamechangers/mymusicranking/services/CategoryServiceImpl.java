@@ -15,7 +15,14 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    @Override
     public ArrayList<Category> getCategoryList() {
         return (ArrayList<Category>) categoryRepository.findAll();
     }
+
+    @Override
+    public void addCategory(Category category) {
+        categoryRepository.save(category);
+    }
+
 }

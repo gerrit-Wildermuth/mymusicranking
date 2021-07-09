@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AlbumService {
     public List<Album> getAlbumList();
+
+    void addAlbum(Album album);
 }

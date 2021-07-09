@@ -2,7 +2,7 @@
 <Configuration>
     <Appenders>
         <Console name="STDOUT">
-            <PatternLayout pattern="%m%n"></PatternLayout>
+            <PatternLayout pattern="%d [%t] %-5p %-30.40c{1} - %m%n"/>
         </Console>
     </Appenders>
     <Loggers>

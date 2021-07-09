@@ -24,4 +24,8 @@ public class Category {
             inverseJoinColumns = {@JoinColumn(name = "song_id")}
     )
     private List<Song> songList = new ArrayList<>();
+
+    public void addSongCategory(Song song) {
+        this.songList.add(song);
+    }
 }
