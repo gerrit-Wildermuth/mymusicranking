@@ -1,0 +1,13 @@
+[INFO ] 2021-07-12 14:54:36.418 [restartedMain] MyMusicRankingApplication - Starting MyMusicRankingApplication using Java 11.0.11 on CPX-V3LE7KXL1H3 with PID 19032 (C:\Users\gerrit.wildermuth\env2021\mymusicranking\target\classes started by gerrit.wildermuth in C:\Users\gerrit.wildermuth\env2021\mymusicranking)
+[INFO ] 2021-07-12 14:54:36.463 [restartedMain] MyMusicRankingApplication - The following profiles are active: dev
+[INFO ] 2021-07-12 14:54:49.402 [restartedMain] MyMusicRankingApplication - Started MyMusicRankingApplication in 15.27 seconds (JVM running for 22.082)
+[INFO ] 2021-07-12 15:00:13.564 [restartedMain] MyMusicRankingApplication - Starting MyMusicRankingApplication using Java 11.0.11 on CPX-V3LE7KXL1H3 with PID 9020 (C:\Users\gerrit.wildermuth\env2021\mymusicranking\target\classes started by gerrit.wildermuth in C:\Users\gerrit.wildermuth\env2021\mymusicranking)
+[INFO ] 2021-07-12 15:00:13.581 [restartedMain] MyMusicRankingApplication - The following profiles are active: dev
+[INFO ] 2021-07-12 15:00:29.138 [restartedMain] MyMusicRankingApplication - Started MyMusicRankingApplication in 16.904 seconds (JVM running for 21.154)
+[INFO ] 2021-07-12 15:08:15.747 [http-nio-8080-exec-1] SongController - Song got registered successfully! Song Title: testerrrr
+[INFO ] 2021-07-12 19:25:02.123 [restartedMain] MyMusicRankingApplication - Starting MyMusicRankingApplication using Java 11.0.11 on CPX-V3LE7KXL1H3 with PID 11828 (C:\Users\gerrit.wildermuth\env2021\mymusicranking\target\classes started by gerrit.wildermuth in C:\Users\gerrit.wildermuth\env2021\mymusicranking)
+[INFO ] 2021-07-12 19:25:02.144 [restartedMain] MyMusicRankingApplication - The following profiles are active: dev
+[INFO ] 2021-07-12 19:25:18.027 [restartedMain] MyMusicRankingApplication - Started MyMusicRankingApplication in 19.882 seconds (JVM running for 32.275)
+[INFO ] 2021-07-12 19:42:29.420 [restartedMain] MyMusicRankingApplication - Starting MyMusicRankingApplication using Java 11.0.11 on CPX-V3LE7KXL1H3 with PID 17496 (C:\Users\gerrit.wildermuth\env2021\mymusicranking\target\classes started by gerrit.wildermuth in C:\Users\gerrit.wildermuth\env2021\mymusicranking)
+[INFO ] 2021-07-12 19:42:29.443 [restartedMain] MyMusicRankingApplication - The following profiles are active: dev
+[INFO ] 2021-07-12 19:42:46.212 [restartedMain] MyMusicRankingApplication - Started MyMusicRankingApplication in 18.735 seconds (JVM running for 22.609)

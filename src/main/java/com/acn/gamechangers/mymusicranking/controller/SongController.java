@@ -3,11 +3,8 @@ package com.acn.gamechangers.mymusicranking.controller;
 import com.acn.gamechangers.mymusicranking.model.Album;
 import com.acn.gamechangers.mymusicranking.model.Category;
 import com.acn.gamechangers.mymusicranking.model.Song;
-import com.acn.gamechangers.mymusicranking.services.AlbumServiceImpl;
-import com.acn.gamechangers.mymusicranking.services.CategoryServiceImpl;
-import com.acn.gamechangers.mymusicranking.services.SongServiceImpl;
+import com.acn.gamechangers.mymusicranking.services.*;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.Level;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,9 +24,9 @@ import static com.acn.gamechangers.mymusicranking.config.Helper.getPreviousPageB
 @Log4j2
 public class SongController {
 
-    private final SongServiceImpl songService;
-    private final CategoryServiceImpl categoryService;
-    private final AlbumServiceImpl albumService;
+    private final SongService songService;
+    private final CategoryService categoryService;
+    private final AlbumService albumService;
 
     public SongController(SongServiceImpl songService, CategoryServiceImpl categoryService, AlbumServiceImpl albumService) {
         this.songService = songService;
@@ -42,13 +39,7 @@ public class SongController {
         ModelAndView modelAndView = new ModelAndView();
         Song song = new Song();
         song.setReleaseDate(LocalDate.now());
-        List<Category> categoryList = categoryService.getCategoryList();
-        List<Album> albumList = albumService.getAlbumList();
-        modelAndView.addObject("categoryList", categoryList);
-        modelAndView.addObject("albumList", albumList);
-        modelAndView.addObject("song", song);
-        modelAndView.setViewName("form");
-        log.log(Level.INFO, "");
+        setModelAndViewContentForSong(song, modelAndView);
         return modelAndView;
     }
 
@@ -64,38 +55,17 @@ public class SongController {
     @PostMapping("/form")
     public ModelAndView addSong(@Valid Song song, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("song", song);
-        List<Category> categoryList = categoryService.getCategoryList();
-        List<Album> albumList = albumService.getAlbumList();
-        modelAndView.addObject("categoryList", categoryList);
-        modelAndView.addObject("albumList", albumList);
-        modelAndView.setViewName("form");
+        setModelAndViewContentForSong(song, modelAndView);
         if (bindingResult.hasErrors()) {
-            modelAndView.addObject("message", "Please correct the errors in form!");
-            log.info("There where errors in the form!");
-            modelAndView.addObject("bindingResult", bindingResult);
-            return modelAndView;
+            return errorHandlingForForm(bindingResult, modelAndView);
         } else {
-           /* List<Album> songAlbums = song.getAlbumList();
-            List<Category> songCategories = song.getCategoryList();
-            for (Album album : songAlbums) {
-                album.addSongAlbum(song);
-                albumService.addAlbum(album);
-            }
-            for (Category category : songCategories) {
-                category.addSongCategory(song);
-                categoryService.addCategory(category);
-            }*/
-            
-            songService.addSong(song);
-            modelAndView.addObject("message",
-                    "Song got registered successfully! Song Title: " + song.getTitle());
+            saveSongWithAlbumsAndCategory(song, modelAndView);
         }
         return modelAndView;
     }
 
     @PostMapping("/deleteSong")
-    public ModelAndView removeSong(@RequestParam Long songId, HttpServletRequest request) {
+    public ModelAndView removeSong(@PathVariable("songsId") Long songId, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(getPreviousPageByRequest(request).orElse("/songs"));
         Optional<Song> byIdOptional = songService.findByIdOptional(songId);
@@ -116,5 +86,38 @@ public class SongController {
     public ResponseEntity changeSong(@RequestBody Song song) {
         songService.changeSong(song);
         return ResponseEntity.ok().build();
+    }
+
+    private void setModelAndViewContentForSong(Song song, ModelAndView modelAndView) {
+        modelAndView.addObject("song", song);
+        List<Category> categoryList = categoryService.getCategoryList();
+        List<Album> albumList = albumService.getAlbumList();
+        modelAndView.addObject("categoryList", categoryList);
+        modelAndView.addObject("albumList", albumList);
+        modelAndView.setViewName("form");
+    }
+
+    private void saveSongWithAlbumsAndCategory(Song song, ModelAndView modelAndView) {
+        songService.addSong(song);
+        List<Album> songAlbums = song.getAlbumList();
+        List<Category> songCategories = song.getCategoryList();
+        for (Album album : songAlbums) {
+            album.addSongAlbum(song);
+            albumService.addAlbum(album);
+        }
+        for (Category category : songCategories) {
+            category.addSongCategory(song);
+            categoryService.addCategory(category);
+        }
+        log.info("Song got registered successfully! Song Title: " + song.getTitle());
+        modelAndView.addObject("message",
+                "Song got registered successfully! Song Title: " + song.getTitle());
+    }
+
+    private ModelAndView errorHandlingForForm(BindingResult bindingResult, ModelAndView modelAndView) {
+        modelAndView.addObject("message", "Please correct the errors in form!");
+        log.info("There where errors in the form!");
+        modelAndView.addObject("bindingResult", bindingResult);
+        return modelAndView;
     }
 }

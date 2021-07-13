@@ -1,12 +1,13 @@
 package com.acn.gamechangers.mymusicranking.controller;
 
+import com.acn.gamechangers.mymusicranking.services.ArtistService;
 import com.acn.gamechangers.mymusicranking.services.ArtistServiceImpl;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/artist")
 public class ArtistController {
 
-    private final ArtistServiceImpl artistService;
+    private final ArtistService artistService;
 
 
     public ArtistController(ArtistServiceImpl artistService) {

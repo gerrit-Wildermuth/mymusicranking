@@ -56,7 +56,7 @@ public class Song {
         this.albumList = albumList;
     }
 
-    public String toStringWithoutAlbum() {
+    public String toStringWithoutAlbumAndCategory() {
         return "Song{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
@@ -64,7 +64,6 @@ public class Song {
                 ", rating=" + rating +
                 ", plays=" + plays +
                 ", length=" + length +
-                ", category=" + categoryList +
                 '}';
     }
 }
